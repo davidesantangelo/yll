@@ -1,5 +1,0 @@
-ignore:
-  - type: Redirect
-    warning_code: [Warning code if available]
-    message: "Possible unprotected redirect"
-    file: app/controllers/redirects_controller.rb
