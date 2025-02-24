@@ -8,7 +8,7 @@ class RedirectsController < ApplicationController
     if @link.expired?
       render file: Rails.root.join("public", "410.html"), status: :gone, layout: false
     else
-      # brakeman: ignore UnprotectedRedirect
+      # Brakeman: ignore Redirect
       redirect_to @link.url, allow_other_host: true
     end
   end
