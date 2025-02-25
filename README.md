@@ -1,6 +1,6 @@
 # YLL - Your Link Shortener
 
-[![Ruby](https://img.shields.io/badge/Ruby-3.2.0-red)](https://www.ruby-lang.org/)
+[![Ruby](https://img.shields.io/badge/Ruby-3.4.0-red)](https://www.ruby-lang.org/)
 [![Rails](https://img.shields.io/badge/Rails-7.0.0-red)](https://rubyonrails.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -140,6 +140,99 @@ rspec
 
 # Run linting
 rubocop
+```
+
+## 🚢 Deployment with Kamal
+
+YLL supports deployment with [Kamal](https://kamal-deploy.org/), a deployment tool for Ruby on Rails applications that uses Docker and SSH.
+
+### Prerequisites
+
+- Docker installed locally
+- SSH access to your production server
+- Docker installed on your production server
+
+### Configuration
+
+1. Install the Kamal gem:
+```bash
+gem install kamal
+```
+
+2. Initialize Kamal in your project:
+```bash
+kamal init
+```
+
+3. Edit the generated `config/deploy.yml` file:
+```yaml
+service: yll
+image: username/yll
+registry:
+  username: registry_username
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+servers:
+  web:
+    hosts:
+      - your-server-ip
+    labels:
+      traefik.http.routers.yll.rule: Host(`yll.yourdomain.com`)
+env:
+  clear:
+    DATABASE_URL: postgres://username:password@db-host/yll_production
+    RAILS_ENV: production
+    HOST_URL: https://yll.yourdomain.com
+volumes:
+  - /path/on/host/storage:/rails/storage
+```
+
+### Deployment Commands
+
+```bash
+# Build and push the Docker image
+kamal setup
+
+# Deploy the application
+kamal deploy
+
+# Check deployment status
+kamal status
+
+# View logs
+kamal logs
+
+# Rollback to previous version
+kamal rollback
+```
+
+### Continuous Deployment
+
+You can set up continuous deployment using GitHub Actions:
+
+1. Create `.github/workflows/deploy.yml`:
+```yaml
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+      - name: Install Kamal
+        run: gem install kamal
+      - name: Deploy
+        run: kamal deploy
+        env:
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 ```
 
 ## 🛡️ Security Features
