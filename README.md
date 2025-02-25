@@ -1,7 +1,7 @@
 # YLL - Your Link Shortener
 
 [![Ruby](https://img.shields.io/badge/Ruby-3.4.0-red)](https://www.ruby-lang.org/)
-[![Rails](https://img.shields.io/badge/Rails-7.0.0-red)](https://rubyonrails.org/)
+[![Rails](https://img.shields.io/badge/Rails-8.0.0-red)](https://rubyonrails.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 YLL is a powerful, lightweight URL shortener built with Ruby on Rails. Create and manage shortened URLs with advanced features like expiration dates and password protection.
@@ -17,7 +17,7 @@ YLL is a powerful, lightweight URL shortener built with Ruby on Rails. Create an
 ## 📋 Requirements
 
 - Ruby 3.0+
-- Rails 7.0+
+- Rails 8.0+
 - PostgreSQL (recommended)
 
 ## 🛠️ Installation
