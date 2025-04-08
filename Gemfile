@@ -43,7 +43,7 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "addressable", "~> 2.8"
-gem "faraday", "~> 2.7"
+gem "faraday", "~> 2.12"
 gem "bcrypt", "~> 3.1.16"
 
 group :development, :test do
